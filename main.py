@@ -4,6 +4,10 @@ WEBBOOK_URL_TEMPLATE = 'https://{}.herokuapp.com/{}'
 
 
 def main():
+    print(config.HEROKU_APP_NAME)
+    print(config.TOKEN)
+    print(config.PORT)
+
     if config.HEROKU_APP_NAME:
         bot.start_webhook(
             listen='0.0.0.0',
