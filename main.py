@@ -7,7 +7,7 @@ def main():
     if config.HEROKU_APP_NAME:
         bot.start_webhook(
             listen='0.0.0.0',
-            port=config.PORT,
+            port=int(config.PORT),
             url_path=config.TOKEN,
             webhook_url=WEBBOOK_URL_TEMPLATE.format(
                 config.HEROKU_APP_NAME, config.TOKEN,
