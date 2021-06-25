@@ -4,5 +4,5 @@ services:
   bot:
     build: .
     environment:
-      - TOKEN=940209064:AAGC2fR6B37_v145knfTU9NydQMXE9IzdHM
+      - TOKEN=
     command: python main.py
