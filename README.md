@@ -2,7 +2,8 @@
 
 ### Setup
 ```
-# Configure TOKEN in docker-compose.yml
+cp docker-compose.override.example.yml docker-compose.override.yml
+# Configure environment variables in docker-compose.override.yml
 docker-compose build
 ```
 
