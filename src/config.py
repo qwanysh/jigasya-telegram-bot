@@ -7,3 +7,5 @@ PORT = os.getenv('PORT')
 TOKEN = os.getenv('TOKEN')
 
 SUPERUSER_ID = os.getenv('SUPERUSER_ID')
+
+JIGASYA_CHAT_ID = os.getenv('JIGASYA_CHAT_ID')
