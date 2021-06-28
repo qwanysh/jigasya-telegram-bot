@@ -6,3 +6,4 @@ services:
     environment:
       - TOKEN=
     command: python main.py
+    tty: true
