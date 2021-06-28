@@ -2,10 +2,10 @@ import os
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
 
-PORT = os.getenv('PORT')
+PORT = int(os.getenv('PORT', 0))
 
 TOKEN = os.getenv('TOKEN')
 
-SUPERUSER_ID = os.getenv('SUPERUSER_ID')
+SUPERUSER_ID = int(os.getenv('SUPERUSER_ID'))
 
-JIGASYA_CHAT_ID = os.getenv('JIGASYA_CHAT_ID')
+JIGASYA_CHAT_ID = int(os.getenv('JIGASYA_CHAT_ID'))
