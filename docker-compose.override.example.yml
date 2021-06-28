@@ -1,0 +1,7 @@
+version: '2.2'
+
+services:
+  bot:
+    environment:
+      - TOKEN=
+      - SUPERUSER_ID=
