@@ -3,8 +3,7 @@ version: '2.2'
 services:
   bot:
     build: .
-    environment:
-      - TOKEN=
-      - SUPERUSER_ID=
     command: python main.py
     tty: true
+    volumes:
+    - .:/app
