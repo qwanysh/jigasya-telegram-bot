@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from src.helpers import permissions
+from src.utils import permissions
 
 
 def start_handler(update: Update, context: CallbackContext):
