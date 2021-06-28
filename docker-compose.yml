@@ -5,3 +5,5 @@ services:
     build: .
     command: python main.py
     tty: true
+    volumes:
+    - .:/app
