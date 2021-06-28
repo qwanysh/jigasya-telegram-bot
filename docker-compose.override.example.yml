@@ -5,3 +5,4 @@ services:
     environment:
       - TOKEN=
       - SUPERUSER_ID=
+      - JIGASYA_CHAT_ID=
