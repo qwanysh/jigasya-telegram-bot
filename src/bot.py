@@ -9,6 +9,9 @@ bot = Updater(token=config.TOKEN)
 dispatcher = bot.dispatcher
 dispatcher.add_handler(CommandHandler('start', handlers.start_handler))
 dispatcher.add_handler(CommandHandler('chat_info', handlers.chat_info_handler))
+dispatcher.add_handler(
+    CommandHandler('register', handlers.register_member_handler),
+)
 
 job_queue = bot.job_queue
 job_queue.run_daily(
