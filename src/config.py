@@ -9,3 +9,5 @@ TOKEN = os.getenv('TOKEN')
 SUPERUSER_ID = int(os.getenv('SUPERUSER_ID'))
 
 JIGASYA_CHAT_ID = int(os.getenv('JIGASYA_CHAT_ID'))
+
+DATABASE_URL = os.getenv('DATABASE_URL')
