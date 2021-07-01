@@ -10,6 +10,7 @@ SUPERUSER_ID = int(os.getenv('SUPERUSER_ID'))
 
 JIGASYA_CHAT_ID = int(os.getenv('JIGASYA_CHAT_ID'))
 
-DATABASE_URL = os.getenv('DATABASE_URL', '').replace(
+DATABASE_URL = os.getenv('DATABASE_URL', '')
+DATABASE_URL = DATABASE_URL.replace(
     'postgres', 'postgresql', 1,  # sqlalchemy doesn't support postgres driver
-)
+) if DATABASE_URL.startswith('postgres://') else DATABASE_URL
