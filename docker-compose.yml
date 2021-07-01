@@ -10,7 +10,7 @@ services:
     depends_on:
       - bot-db
     environment:
-      - DATABASE_URL=postgres://postgres@bot-db/postgres
+      - DATABASE_URL=postgresql://postgres@bot-db/postgres
 
   bot-db:
     image: postgres:alpine
