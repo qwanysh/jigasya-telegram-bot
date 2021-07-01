@@ -9,7 +9,7 @@ class JigasyaMember(database.Base):
     telegram_id = Column(
         Integer, primary_key=True, autoincrement=False, index=True,
     )
-    username = Column(String, nullable=False)
+    username = Column(String)
     first_name = Column(String, nullable=False)
     last_name = Column(String)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
