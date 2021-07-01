@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 python-telegram-bot = "*"
+alembic = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 pytest = "*"
