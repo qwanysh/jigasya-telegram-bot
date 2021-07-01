@@ -1,6 +1,6 @@
 from datetime import time
 
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import CommandHandler, Updater
 
 from src import config, handlers
 
