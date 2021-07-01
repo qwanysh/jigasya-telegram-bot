@@ -131,3 +131,4 @@ dmypy.json
 .idea/
 docker-compose.override.yml
 .bash_history
+.local/
