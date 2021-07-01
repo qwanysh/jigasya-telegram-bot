@@ -15,7 +15,7 @@ def chat_info_handler(update: Update, context: CallbackContext):
     update.message.reply_text(update.to_json())
 
 
-# @permissions.jigasya_chat_only
+@permissions.jigasya_chat_only
 def register_member_handler(update: Update, context: CallbackContext):
     from_user = update.message.from_user
     member = models.JigasyaMember(
