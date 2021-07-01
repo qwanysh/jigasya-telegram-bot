@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
-from sqlalchemy import func
+from sqlalchemy import Column, DateTime, Integer, String, func
 
 from src import database
 

@@ -2,7 +2,7 @@ from sqlalchemy.exc import IntegrityError
 from telegram import Update
 from telegram.ext import CallbackContext
 
-from src import models, database
+from src import database, models
 from src.utils import permissions
 
 
