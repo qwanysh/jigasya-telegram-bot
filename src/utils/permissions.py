@@ -18,8 +18,7 @@ def superuser_only(func):
 def jigasya_chat_only(func):
     @wraps(func)
     def wrapper(update: Update, context: CallbackContext):
-        chat = update.message.chat
-        if chat.type == 'supergroup' and chat.id == config.JIGASYA_CHAT_ID:
+        if update.message.chat.id == config.JIGASYA_CHAT_ID:
             func(update, context)
 
     return wrapper
