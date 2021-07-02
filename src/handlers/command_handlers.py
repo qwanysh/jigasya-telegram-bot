@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from telegram import Update, ParseMode
+from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
 from src import database, models
