@@ -1,5 +1,5 @@
 from sqlalchemy.exc import IntegrityError
-from telegram import Update, ParseMode
+from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
 from src import database, models
@@ -22,12 +22,11 @@ def register_member_handler(update: Update, context: CallbackContext):
         telegram_id=from_user.id, username=from_user.username,
         first_name=from_user.first_name, last_name=from_user.last_name,
     )
-    session = database.SessionLocal()
-    session.add(member)
-    try:
-        session.commit()
-        text = f'Member `#{member.telegram_id}` registered successfully'
-    except IntegrityError:
-        text = f'Member `#{member.telegram_id}` is already registered'
-    session.close()
+    with database.Session() as session:
+        session.add(member)
+        try:
+            session.commit()
+            text = f'Member `#{member.telegram_id}` registered successfully'
+        except IntegrityError:
+            text = f'Member `#{member.telegram_id}` is already registered'
     update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN_V2)
