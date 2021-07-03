@@ -1,4 +1,5 @@
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy.sql.expression import func
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext
 
@@ -30,3 +31,16 @@ def register_member_handler(update: Update, context: CallbackContext):
         except IntegrityError:
             text = f'Member `#{member.telegram_id}` is already registered'
     update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN_V2)
+
+
+@permissions.jigasya_chat_only
+def find_dolbaeb_handler(update: Update, context: CallbackContext):
+    with database.Session() as session:
+        random_member = session.query(
+            models.JigasyaMember,
+        ).order_by(func.random()).first()
+    if random_member:
+        text = f'Долбаёб найден: {random_member.first_name}'
+    else:
+        text = 'Долбаёб не найден'
+    update.message.reply_text(text)

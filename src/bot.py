@@ -12,6 +12,9 @@ dispatcher.add_handler(CommandHandler('chat_info', handlers.chat_info_handler))
 dispatcher.add_handler(
     CommandHandler('register', handlers.register_member_handler),
 )
+dispatcher.add_handler(
+    CommandHandler('find_dolbaeb', handlers.find_dolbaeb_handler),
+)
 
 job_queue = bot.job_queue
 job_queue.run_daily(
