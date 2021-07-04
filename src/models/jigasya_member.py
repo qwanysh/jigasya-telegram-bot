@@ -13,3 +13,6 @@ class JigasyaMember(database.Base):
     first_name = Column(String, nullable=False)
     last_name = Column(String)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
+
+    def __str__(self):
+        return f'@{self.username}' if self.username else self.first_name

@@ -40,7 +40,7 @@ def find_dolbaeb_handler(update: Update, context: CallbackContext):
             models.JigasyaMember,
         ).order_by(func.random()).first()
     if random_member:
-        text = f'Долбаёб найден: {random_member.first_name}'
+        text = f'Долбаёб найден: {random_member}'
     else:
         text = 'Долбаёб не найден'
     update.message.reply_text(text)
