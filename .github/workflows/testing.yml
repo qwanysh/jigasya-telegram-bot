@@ -25,6 +25,6 @@ jobs:
       run: |
         pytest
       env:
-        TOKEN=whatever
-        SUPERUSER_ID=1
-        JIGASYA_CHAT_ID=1
+        TOKEN: whatever
+        SUPERUSER_ID: 1
+        JIGASYA_CHAT_ID: 1
