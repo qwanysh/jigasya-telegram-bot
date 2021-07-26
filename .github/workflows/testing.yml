@@ -2,9 +2,9 @@ name: Testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -32,6 +32,6 @@ jobs:
         pytest
       env:
         DATABASE_URL: postgresql://postgres@bot-db/postgres
-        TOKEN: 940209064:AAGC2fR6B37_v145knfTU9NydQMXE9IzdHM
+        TOKEN: 000000000:00000000000000000000000000000000000
         SUPERUSER_ID: 1
         JIGASYA_CHAT_ID: 1
