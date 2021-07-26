@@ -32,6 +32,6 @@ jobs:
         pytest
       env:
         DATABASE_URL: postgresql://postgres@bot-db/postgres
-        TOKEN: whatever
+        TOKEN: 940209064:AAGC2fR6B37_v145knfTU9NydQMXE9IzdHM
         SUPERUSER_ID: 1
         JIGASYA_CHAT_ID: 1
