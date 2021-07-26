@@ -1,5 +1,3 @@
-name: Testing
-
 on:
   push:
     branches: [main]
