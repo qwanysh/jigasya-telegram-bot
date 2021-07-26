@@ -1,4 +1,5 @@
 # jigasya-telegram-bot
+![Tests](https://github.com/qwanysh/jigasya-telegram-bot/actions/workflows/tests.yml/badge.svg)
 
 ### Setup
 ```
