@@ -1,4 +1,4 @@
-from sqlalchemy import Column, DateTime, Integer, String, func
+from sqlalchemy import Column, Date, DateTime, Integer, String, func
 
 from src import database
 
@@ -12,6 +12,7 @@ class JigasyaMember(database.Base):
     username = Column(String)
     first_name = Column(String, nullable=False)
     last_name = Column(String)
+    birth_date = Column(Date)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
 
     def __str__(self):
