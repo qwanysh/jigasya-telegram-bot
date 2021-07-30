@@ -28,8 +28,7 @@ jobs:
         pip install pipenv
         pipenv install --system --deploy --ignore-pipfile --dev
     - name: Test
-      run: |
-        pytest
+      run: pytest
       env:
         DATABASE_URL: postgresql://postgres@bot-db/postgres
         TOKEN: 000000000:00000000000000000000000000000000000
