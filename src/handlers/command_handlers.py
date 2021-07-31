@@ -1,7 +1,8 @@
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.expression import func
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, ConversationHandler, CommandHandler, \
+    MessageHandler, Filters
 
 from src import database, models
 from src.utils import permissions
@@ -16,21 +17,49 @@ def chat_info_handler(update: Update, context: CallbackContext):
     update.message.reply_text(update.to_json())
 
 
-@permissions.jigasya_chat_only
-def register_member_handler(update: Update, context: CallbackContext):
+def register_member_entry_handler(update: Update, context: CallbackContext):
     from_user = update.message.from_user
-    member = models.JigasyaMember(
-        telegram_id=from_user.id, username=from_user.username,
-        first_name=from_user.first_name, last_name=from_user.last_name,
-    )
     with database.Session() as session:
-        session.add(member)
-        try:
+        member = session.query(models.JigasyaMember).get(from_user.id)
+        if not member:
+            member = models.JigasyaMember(
+                telegram_id=from_user.id, username=from_user.username,
+                first_name=from_user.first_name, last_name=from_user.last_name,
+            )
+            session.add(member)
             session.commit()
-            text = f'Member `#{member.telegram_id}` registered successfully'
-        except IntegrityError:
-            text = f'Member `#{member.telegram_id}` is already registered'
-    update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN_V2)
+            update.message.reply_text(f'{member} успешно зарегистрирован')
+            return ConversationHandler.END
+        else:
+            update.message.reply_text(f'{member} уже зарегистрирован. Обновить информацию(/update)?')
+            return 1
+
+
+def register_member_update_handler(update: Update, context: CallbackContext):
+    from_user = update.message.from_user
+    with database.Session() as session:
+        member = session.query(models.JigasyaMember).get(from_user.id)
+        member.username = from_user.username
+        member.first_name = from_user.first_name
+        member.last_name = from_user.last_name
+        session.commit()
+        update.message.reply_text(f'{member} успешно обновлен')
+    return ConversationHandler.END
+
+
+def cancel_handler(update: Update, context: CallbackContext):
+    update.message.reply_text('Операция отменена')
+    return ConversationHandler.END
+
+
+register_member_handler = ConversationHandler(
+    entry_points=[CommandHandler('register', register_member_entry_handler)],
+    states={
+        1: [CommandHandler('update', register_member_update_handler)],
+    },
+    fallbacks=[MessageHandler(Filters.all, cancel_handler)],
+)
+
 
 
 @permissions.jigasya_chat_only

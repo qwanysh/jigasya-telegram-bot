@@ -9,9 +9,7 @@ bot = Updater(token=config.TOKEN)
 dispatcher = bot.dispatcher
 dispatcher.add_handler(CommandHandler('start', handlers.start_handler))
 dispatcher.add_handler(CommandHandler('chat_info', handlers.chat_info_handler))
-dispatcher.add_handler(
-    CommandHandler('register', handlers.register_member_handler),
-)
+dispatcher.add_handler(handlers.register_member_handler)
 dispatcher.add_handler(
     CommandHandler('find_dolbaeb', handlers.find_dolbaeb_handler),
 )
