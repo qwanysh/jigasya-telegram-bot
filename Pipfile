@@ -8,6 +8,7 @@ python-telegram-bot = "*"
 alembic = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
+jinja2 = "*"
 
 [dev-packages]
 pytest = "*"
