@@ -1,5 +1,11 @@
 import os
 
+import jinja2
+
+jinja2_env = jinja2.Environment(
+    loader=jinja2.PackageLoader(package_name='src'), trim_blocks=True,
+)
+
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
 
 PORT = int(os.getenv('PORT', 0))
