@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Date, DateTime, Integer, String, func
+from datetime import datetime
+
+from sqlalchemy import Column, Date, DateTime, Integer, String, event, func
 
 from src import database
 
@@ -14,6 +16,12 @@ class JigasyaMember(database.Base):
     last_name = Column(String)
     birth_date = Column(Date)
     created_at = Column(DateTime, server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime)
 
     def __str__(self):
         return f'@{self.username}' if self.username else self.first_name
+
+
+@event.listens_for(JigasyaMember, 'before_update')
+def update_updated_at(mapper, connection, target):
+    target.updated_at = datetime.utcnow()
