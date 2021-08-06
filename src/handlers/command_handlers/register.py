@@ -6,7 +6,7 @@ from telegram.ext import (CallbackContext, CommandHandler, ConversationHandler,
                           Filters, MessageHandler)
 
 from src import database, models
-from src.utils import permissions
+from src.utils import helpers, permissions
 
 UPDATE, BIRTH_DATE = range(2)
 
@@ -21,10 +21,10 @@ def entry_handler(update: Update, context: CallbackContext):
                 [['Да']], one_time_keyboard=True, resize_keyboard=True,
                 selective=True,
             )
-            update.message.reply_text(
-                f'{member} уже зарегистрирован. Обновить информацию? /cancel '
-                f'для отмены', reply_markup=reply_markup,
+            message = helpers.render_message(
+                'register/already_exists.html', member=member,
             )
+            update.message.reply_html(message, reply_markup=reply_markup)
             return UPDATE
         else:
             member = models.JigasyaMember(
@@ -36,11 +36,10 @@ def entry_handler(update: Update, context: CallbackContext):
             reply_markup = ForceReply(
                 selective=True, input_field_placeholder='dd.mm.yyyy',
             )
-            update.message.reply_html(
-                f'{member} успешно зарегистрирован. Введите дату рождения в '
-                f'формате <code>dd.mm.yyyy</code>. /cancel для отмены',
-                reply_markup=reply_markup,
+            message = helpers.render_message(
+                'register/registered.html', member=member,
             )
+            update.message.reply_html(message, reply_markup=reply_markup)
             return BIRTH_DATE
 
 
@@ -55,16 +54,16 @@ def update_handler(update: Update, context: CallbackContext):
         reply_markup = ForceReply(
             selective=True, input_field_placeholder='dd.mm.yyyy',
         )
-        update.message.reply_html(
-            f'{member} успешно обновлен. Введите дату рождения в формате '
-            f'<code>dd.mm.yyyy</code>. /cancel для отмены',
-            reply_markup=reply_markup,
+        message = helpers.render_message(
+            'register/update.html', member=member,
         )
+        update.message.reply_html(message, reply_markup=reply_markup)
     return BIRTH_DATE
 
 
 def birth_date_handler(update: Update, context: CallbackContext):
     from_user = update.message.from_user
+    update.message.reply_text(update.message.text)
     try:
         birth_date = datetime.strptime(update.message.text, '%d.%m.%Y').date()
         with database.Session() as session:
@@ -80,10 +79,8 @@ def birth_date_handler(update: Update, context: CallbackContext):
         reply_markup = ForceReply(
             selective=True, input_field_placeholder='dd.mm.yyyy',
         )
-        update.message.reply_html(
-            'Указанная дата некорректна. Попробуйте еще раз. /cancel для '
-            'отмены', reply_markup=reply_markup,
-        )
+        message = helpers.render_message('register/invalid_date.html')
+        update.message.reply_html(message, reply_markup=reply_markup)
         return BIRTH_DATE
 
 
