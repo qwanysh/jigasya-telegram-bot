@@ -3,6 +3,7 @@ from datetime import time
 from telegram.ext import CommandHandler, Updater
 
 from src import config, handlers
+from src.utils import helpers
 
 bot = Updater(token=config.TOKEN)
 
@@ -14,6 +15,9 @@ dispatcher.add_handler(
 )
 dispatcher.add_handler(handlers.register_conversation_handler)
 dispatcher.add_handler(CommandHandler('members', handlers.members_handler))
+dispatcher.add_handler(
+    helpers.get_middleware_handler(handlers.register_handler), group=-1,
+)
 
 job_queue = bot.job_queue
 job_queue.run_daily(
