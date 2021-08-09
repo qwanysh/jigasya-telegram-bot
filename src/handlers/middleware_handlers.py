@@ -8,8 +8,6 @@ from src.utils import permissions
 
 @permissions.jigasya_chat_only
 def register_handler(update: Update, context: CallbackContext):
-    update.message.reply_text('register_handler')
-
     from_user = update.message.from_user
     redis_key = f'registered_member:{from_user.id}'
 
