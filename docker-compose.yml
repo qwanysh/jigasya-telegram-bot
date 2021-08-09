@@ -8,11 +8,16 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - bot-db
+      - postgres
+      - redis
     environment:
-      - DATABASE_URL=postgresql://postgres@bot-db/postgres
+      - DATABASE_URL=postgresql://postgres@postgres/postgres
+      - REDIS_URL=redis://redis:6379
 
-  bot-db:
+  postgres:
     image: postgres:alpine
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+
+  redis:
+    image: redis:alpine

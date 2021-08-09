@@ -20,3 +20,5 @@ DATABASE_URL = os.getenv('DATABASE_URL', '')
 # sqlalchemy doesn't support postgres driver
 if DATABASE_URL.startswith('postgres://'):
     DATABASE_URL = DATABASE_URL.replace('postgres', 'postgresql', 1)
+
+REDIS_URL = os.getenv('REDIS_URL')

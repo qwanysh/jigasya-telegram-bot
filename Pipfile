@@ -9,6 +9,7 @@ alembic = "*"
 sqlalchemy = "*"
 psycopg2-binary = "*"
 jinja2 = "*"
+redis = "*"
 
 [dev-packages]
 pytest = "*"
