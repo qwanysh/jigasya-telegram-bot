@@ -12,7 +12,6 @@ def register_handler(update: Update, context: CallbackContext):
     redis_key = f'registered_member:{from_user.id}'
 
     if redis_client.get(redis_key):
-        update.message.reply_text('user already in cache')
         return
 
     with database.Session() as session:
